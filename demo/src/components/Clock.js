@@ -21,9 +21,12 @@ export default class Clock extends Component {
   }
 
   render() {
+    const {
+      person: { name }
+    } = this.props;
     return (
       <div>
-        <h1>Hello, {this.props.data.name}</h1>
+        <h1>Hello, {name}</h1>
         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
