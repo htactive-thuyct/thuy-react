@@ -5,8 +5,6 @@ import Content from "./components/Content.js";
 import Clock from "./components/Clock";
 import Button from "./components/Button";
 
-const a = { Title: "PNV", menu: ["Students", "Teacher", "Class", "Score"] };
-const b = { name: "Thuy", age: 10 };
 class App extends React.Component {
   state = {
     title: "PNV",
