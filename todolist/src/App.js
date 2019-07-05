@@ -9,32 +9,43 @@ class App extends React.Component {
 
     this.state = {
       listTask: [
-        { task: "learn react", iscompleted: false },
-        { task: "Go shopping", iscompleted: true },
-        { task: "buy flowers", iscompleted: false }
+        { task: "learn react", isCompleted: false },
+        { task: "Go shopping", isCompleted: true },
+        { task: "buy flowers", isCompleted: false }
       ]
     };
   }
 
   addItem = task => {
-    this.state.listTask.push({
-      task: task,
-      iscompleted: false
-    });
-    this.setState({ listTask: this.state.listTask });
+    const newList = [
+      ...this.state.listTask,
+      {
+        task: task,
+        iscompleted: false
+      }
+    ];
+    this.setState({ listTask: newList });
     // console.log(this.state.listTask);
   };
 
   removeItem = index => {
     // console.log(index);
-    let tasks = this.state.listTask;
-    tasks.splice(index, 1);
-    this.setState({ listTask: tasks });
+    const newList = this.state.listTask.filter((t, i) => i !== index);
+    this.setState({ listTask: newList });
   };
 
-  markTodoDone = () => {
-    this.state.listTask.iscompleted = !this.state.listTask.iscompleted;
-    console.log("hello");
+  markTodoDone = index => {
+    const newList = this.state.listTask.map((t, i) => {
+      if (i === index) {
+        return {
+          ...t,
+          isCompleted: !t.isCompleted
+        };
+      }
+      return t;
+    });
+    this.setState({ listTask: newList });
+    //  console.log("hello");
   };
 
   render() {
@@ -42,7 +53,11 @@ class App extends React.Component {
     return (
       <>
         <AddList addItem={this.addItem} />
-        <ShowTask task={this.state.listTask} removeItem={this.removeItem} />
+        <ShowTask
+          task={this.state.listTask}
+          removeItem={this.removeItem}
+          markTodoDone={this.markTodoDone}
+        />
       </>
     );
   }

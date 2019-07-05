@@ -45,24 +45,7 @@ export default class AddList extends Component {
                 </div>
               </div>
             </form>
-
-            <div className="btn">
-              <button className="btn .btn">Completed</button>
-              <button className="btn .btn">Incomplete</button>
-              <button className="btn .btn">Done</button>
-              <button className="btn .btn">Clear Complete</button>
-              <button
-                style={{ visibility: "hidden" }}
-                id="undo"
-                className="btn .btn"
-              >
-                <i className="fa fa-undo" />
-              </button>
-            </div>
-            <br />
-            <ul className="list-group" id="taskList" />
           </div>
-          <div className="col-md-2 col-xs-2 col-lg-2 col-sm-2" />
         </div>
       </div>
     );
