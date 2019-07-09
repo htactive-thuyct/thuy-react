@@ -57,11 +57,19 @@ body {
 /* .complete {
   text-decoration: line-through;
 } */
-.inputTask {
-  border: none;
-  height: 37px;
-  background: none;
-}
+
 .checkbox {
   margin-top: 10px;
+}
+#edit {
+  color: dodgerblue;
+}
+#delete {
+  color: red;
+}
+#inputUpdate {
+  border: 1px gray;
+  height: 37px;
+  width: 616px;
+  background: none;
 }

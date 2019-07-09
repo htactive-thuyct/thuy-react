@@ -3,32 +3,36 @@ import React, { Component } from "react";
 export default class Item extends Component {
   constructor(props) {
     super(props);
-    this.state = { newTask: "" };
+    this.state = {
+      display: false,
+      update: ""
+    };
   }
-  onClickClose = () => {
-    this.props.removeItem(this.props.index);
-    //console.log(this.props.index);
+  onClickClose = id => {
+    this.props.removeItem(id);
   };
 
-  onClickDone = () => {
-    this.props.markTodoDone(this.props.index);
+  onClickDone = id => {
+    this.props.markTodoDone(id);
   };
 
-  // handleChange = event => {
-  //   this.setState({ newTask: event.target.value });
-  //   console.log("helklo");
-  // };
+  handleChange = event => {
+    this.setState({ update: event.target.value });
+    this.props.item.task = event.target.value;
+  };
 
-  // handleSubmit = event => {
-  //   // event.preventDefault();
-  //   // this.props.addItem(this.state.newTask);
-  //   // // console.log("A name was submitted: " + this.state.newTask);
-  //   console.log("helklo");
-  // };
+  onClickCheck = () => {
+    this.props.updateItem({
+      ...this.props.item,
+      task: this.state.update
+    });
+    this.setState({
+      display: !this.state.display
+    });
+  };
 
   render() {
-    const { isCompleted, task } = this.props.item;
-    //  console.log(isCompleted);
+    const { isCompleted, task, id } = this.props.item;
     return (
       <li className="list-group-item checkbox">
         <div className="row">
@@ -37,7 +41,7 @@ export default class Item extends Component {
               id="toggleTaskStatus"
               type="checkbox"
               defaultChecked={isCompleted}
-              onClick={this.onClickDone}
+              onClick={() => this.onClickDone(id)}
             />
           </div>
           <div
@@ -45,28 +49,22 @@ export default class Item extends Component {
               isCompleted ? "complete" : ""
             }`}
           >
-            {task}
-          </div>
-          {/* <input
-              className="inputTask"
+            <input
+              id="inputUpdate"
               type="text"
-              defaultValue={task}
-              disabled
-            /> */}
-          {/* </div> */}
+              value={task}
+              className={this.state.display ? "disabledInput" : "enableInput"}
+              onChange={this.handleChange}
+            />
+          </div>
+
           <div className="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-            <a id="save">
-              <button
-                id="editTask"
-                onClick={this.onClickClose}
-                className="fa fa-pencil"
-              >
-                xóa
-              </button>
-            </a>
-            <a data-confirm="Are you sure to delete this item?">
-              <i id="deleteTask" className="fa fa-trash" />
-            </a>
+            <i id="edit" onClick={this.onClickCheck} className="fa fa-pencil" />
+            <i
+              id="delete"
+              onClick={() => this.onClickClose(id)}
+              className="fa fa-trash"
+            />
           </div>
         </div>
       </li>

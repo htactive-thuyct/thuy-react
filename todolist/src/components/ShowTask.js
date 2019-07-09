@@ -15,6 +15,7 @@ export default class ShowTask extends React.Component {
         index={index}
         markTodoDone={this.props.markTodoDone}
         removeItem={this.props.removeItem}
+        updateItem={this.props.updateItem}
       />
     ));
     return <ul className="list-group"> {items} </ul>;

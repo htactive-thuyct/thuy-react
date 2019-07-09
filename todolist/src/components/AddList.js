@@ -13,8 +13,6 @@ export default class AddList extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.addItem(this.state.newTask);
-    // console.log("A name was submitted: " + this.state.newTask);
-    // // console.log();
   };
 
   render() {
@@ -24,6 +22,7 @@ export default class AddList extends Component {
           <div className="col-md-2 col-xs-2 col-lg-2 col-sm-2" />
           <div className="col-md-8 col-xs-8 col-lg-8 col-sm-8">
             <h2>ToDo List</h2>
+
             <form onSubmit={this.handleSubmit}>
               <div className="row input-area">
                 <div className="form-group col-md-9">

@@ -6,15 +6,10 @@ import ShowTask from "./components/ShowTask.js";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       listTask: []
     };
   }
-  async componentDidMount() {
-    this.getData();
-  }
-
   getData = async () => {
     await fetch("http://5d22a2982ba8cf0014c44f26.mockapi.io/listTask", {
       method: "GET",
@@ -28,6 +23,10 @@ class App extends React.Component {
       })
       .catch(err => err);
   };
+
+  async componentDidMount() {
+    this.getData();
+  }
 
   addItem = async task => {
     let newTask = { isCompleted: false, task: task };
@@ -76,6 +75,22 @@ class App extends React.Component {
       .catch(err => err);
   };
 
+  updateItem = async item => {
+    await fetch(
+      `http://5d22a2982ba8cf0014c44f26.mockapi.io/listTask/${item.id}`,
+      {
+        method: "PUT",
+        mode: "cors",
+        body: JSON.stringify(item),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    ).then(res => {
+      this.getData();
+    });
+  };
+
   render() {
     return (
       <>
@@ -84,6 +99,7 @@ class App extends React.Component {
           task={this.state.listTask}
           removeItem={this.removeItem}
           markTodoDone={this.markTodoDone}
+          updateItem={this.updateItem}
         />
       </>
     );
